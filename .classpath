@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="project/src"/>
+	<classpathentry kind="src" path="project/resources"/>
+	<classpathentry kind="lib" path="project/lib/Apache/commons-io-2.5-javadoc.jar"/>
+	<classpathentry kind="lib" path="project/lib/Apache/commons-io-2.5.jar"/>
+	<classpathentry kind="lib" path="project/lib/Apache/commons-lang3-3.4-javadoc.jar"/>
+	<classpathentry kind="lib" path="project/lib/Apache/commons-lang3-3.4.jar"/>
+	<classpathentry kind="lib" path="project/lib/Apache/commons-logging-1.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="project/lib/Apache/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="project/lib/SQLITE/sqlite-jdbc-3.8.11.2.jar"/>
+	<classpathentry kind="lib" path="project/lib/tika/JAXP_160.jar"/>
+	<classpathentry kind="lib" path="project/lib/tika/tika-app-1.12.jar"/>
+	<classpathentry kind="lib" path="project/lib/WebSphinx/websphinx.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="project/bin"/>
+</classpath>
