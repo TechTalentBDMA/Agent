@@ -22,6 +22,10 @@ public class LocalAgent {
 		filesAnalysis();
 	}
 
+	/**
+	 * Obtiene las páginas web de las URL almacenadas en la tabla
+	 * Places de la BBDD de Mozilla
+	 */
 	public static void browseAnalysis() {
 
 		List<URL> urls = localAnalysis.browserAnalysis();
@@ -44,6 +48,10 @@ public class LocalAgent {
 		}
 	}
 
+	/**
+	 * Extrae mediante Tika los ficheros de música y de texto en
+	 * formatos PDF y MP3
+	 */
 	public static void filesAnalysis() {
 		List<TikaFileBean> ficherosPDF = localAnalysis.getPdfFiles();
 		List<TikaFileBean> ficherosMP3 = localAnalysis.getMp3Files();
