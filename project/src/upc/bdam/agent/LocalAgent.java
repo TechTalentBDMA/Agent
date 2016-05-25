@@ -54,6 +54,7 @@ public class LocalAgent {
 	 */
 	public static void filesAnalysis() {
 		List<TikaFileBean> ficherosPDF = localAnalysis.getPdfFiles();
+		
 		List<TikaFileBean> ficherosMP3 = localAnalysis.getMp3Files();
 
 		System.out.println("EL NÚMERO DE FICHEROS PDF ES: " + ficherosPDF.size());
