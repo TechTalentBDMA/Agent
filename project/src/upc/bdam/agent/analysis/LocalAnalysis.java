@@ -34,8 +34,19 @@ public class LocalAnalysis {
 	
 	public List<TikaFileBean> getMp3Files() {
 		List<TikaFileBean> mp3 = new ArrayList<TikaFileBean>();
-		mp3 = filesAnalizer.getFiles(tikaLocation, IMimeTypes.MIME_MP3_1_TYPE);
 		mp3.addAll(filesAnalizer.getFiles(tikaLocation, IMimeTypes.MIME_MP3_1_TYPE));
+		mp3.addAll(filesAnalizer.getFiles(tikaLocation, IMimeTypes.MIME_MP3_2_TYPE));
+		mp3.addAll(filesAnalizer.getFiles(tikaLocation, IMimeTypes.MIME_MP3_3_TYPE));
+		mp3.addAll(filesAnalizer.getFiles(tikaLocation, IMimeTypes.MIME_MP3_4_TYPE));
+		
+		mp3.addAll(filesAnalizer.getFiles(tikaLocation, IMimeTypes.MIME_MP3_5_TYPE));
+		mp3.addAll(filesAnalizer.getFiles(tikaLocation, IMimeTypes.MIME_MP3_7_TYPE));
+		mp3.addAll(filesAnalizer.getFiles(tikaLocation, IMimeTypes.MIME_MP3_8_TYPE));
+		
+		mp3.addAll(filesAnalizer.getFiles(tikaLocation, IMimeTypes.MIME_MP3_9_TYPE));
+		mp3.addAll(filesAnalizer.getFiles(tikaLocation, IMimeTypes.MIME_MP3_10_TYPE));
+		mp3.addAll(filesAnalizer.getFiles(tikaLocation, IMimeTypes.MIME_MP3_11_TYPE));
+		
 		return mp3;
 	}
 }

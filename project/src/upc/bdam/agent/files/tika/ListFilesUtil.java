@@ -35,7 +35,7 @@ public class ListFilesUtil {
 				}
 
 			} else if (file.isDirectory()) {
-				listFilesAndFilesSubDirectories(file.getAbsolutePath(), mymeType);
+				al.addAll(listFilesAndFilesSubDirectories(file.getAbsolutePath(), mymeType));
 			}
 		}
 		System.out.println(al);

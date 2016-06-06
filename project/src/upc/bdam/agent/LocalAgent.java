@@ -1,6 +1,5 @@
 package upc.bdam.agent;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -9,13 +8,15 @@ import java.util.concurrent.Executors;
 import upc.bdam.agent.analysis.LocalAnalysis;
 import upc.bdam.agent.crawler.SiteDownloadingCrawler;
 import upc.bdam.agent.files.tika.beans.TikaFileBean;
+import upc.bdam.agent.files.watchGuard.WatchGuard;
 import websphinx.Link;
 
 public class LocalAgent {
 
 	private static LocalAnalysis localAnalysis;
 
-	public static void main(String[] args) throws MalformedURLException {
+	public static void main(String[] args) throws Exception {
+		doWatch();
 		localAnalysis = new LocalAnalysis();
 
 		browseAnalysis();
@@ -60,5 +61,12 @@ public class LocalAgent {
 		System.out.println("EL NÚMERO DE FICHEROS PDF ES: " + ficherosPDF.size());
 		System.out.println("EL NÚMERO DE FICHEROS MP3 ES: " + ficherosMP3.size());
 
+	}
+	
+	public static void doWatch(){
+		
+		WatchGuard guard=new WatchGuard();
+		Thread a=new Thread(guard);
+		a.start();	
 	}
 }

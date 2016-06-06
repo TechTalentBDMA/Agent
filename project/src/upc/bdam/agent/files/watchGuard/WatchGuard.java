@@ -1,15 +1,18 @@
 package upc.bdam.agent.files.watchGuard;
 
-import java.io.IOException;
-import java.nio.file.*;
+import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
+import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
+import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.WatchEvent;
+import java.nio.file.WatchKey;
+import java.nio.file.WatchService;
 
 import upc.bdam.agent.config.PropertiesLoader;
 
-import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
-import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
-import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
-
-public class WatchGuard {
+public class WatchGuard implements Runnable {
 
 	private String path = null;
 
@@ -22,25 +25,25 @@ public class WatchGuard {
 		path = PropertiesLoader.getInstance().getProperty(watchguardLocation);
 	}
 
-	public void doWath() throws IOException {
-
-		System.out.println("WatchService in " + path);
-
-		// Obtenemos el directorio
-		Path directoryToWatch = Paths.get(path);
-		if (directoryToWatch == null) {
-			throw new UnsupportedOperationException("Directory not found");
-		}
-
-		// Solicitamos el servicio WatchService
-		WatchService watchService = directoryToWatch.getFileSystem().newWatchService();
-
-		// Registramos los eventos que queremos monitorear
-		directoryToWatch.register(watchService, new WatchEvent.Kind[] { ENTRY_CREATE, ENTRY_DELETE, ENTRY_MODIFY });
-
-		System.out.println("Started WatchService in " + path);
+	public void run() {
 
 		try {
+
+			System.out.println("WatchService in " + path);
+
+			// Obtenemos el directorio
+			Path directoryToWatch = Paths.get(path);
+			if (directoryToWatch == null) {
+				throw new UnsupportedOperationException("Directory not found");
+			}
+
+			// Solicitamos el servicio WatchService
+			WatchService watchService = directoryToWatch.getFileSystem().newWatchService();
+
+			// Registramos los eventos que queremos monitorear
+			directoryToWatch.register(watchService, new WatchEvent.Kind[] { ENTRY_CREATE, ENTRY_DELETE, ENTRY_MODIFY });
+
+			System.out.println("Started WatchService in " + path);
 
 			// Esperamos que algo suceda con el directorio
 			WatchKey key = watchService.take();
@@ -58,8 +61,8 @@ public class WatchGuard {
 				key.reset();
 				key = watchService.take();
 			}
-		} catch (InterruptedException e) {
-			throw new RuntimeException(e);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 	}

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="project/src"/>
+	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="project/resources"/>
 	<classpathentry kind="lib" path="project/lib/Apache/commons-io-2.5-javadoc.jar"/>
 	<classpathentry kind="lib" path="project/lib/Apache/commons-io-2.5.jar"/>
