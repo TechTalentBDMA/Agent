@@ -6,12 +6,20 @@ import java.sql.SQLException;
 import upc.bdam.agent.jdbc.IJdbcTableBean;
 
 /**
- * Clase que representa cada uno de los sitios que han sido visitados.
- * Perteneciente a PLACES.SQLITE
+ * 
+ * HistoryVisit. Bean para guardar los datos de la tabla HistoryVisit.
+ * Finalmente no se utiliza para el piloto
+ * 
+ * @author Grupo 9: 
+ *           - Antolín Barrena Rico
+ *           - Carles Castillejo
+ *           - Raffaele Ghermandi
+ *           - David Pérez Rodríguez
  *
  */
 public class HistoryVisit implements IJdbcTableBean{
 
+	//Declaración del nombre de los campos de la tabla en la BBDD del navegador
 	public static final String HISTORY_VISIT_TABLE_NAME="moz_historyvisits";
 	public static final String HISTORY_VISIT_ID = "id";
 	public static final String HISTORY_VISIT_FROM_VISIT = "from_visit";
@@ -20,7 +28,7 @@ public class HistoryVisit implements IJdbcTableBean{
 	public static final String HISTORY_VISIT_VISIT_TYPE = "visit_type";
 	public static final String HISTORY_VISIT_SESSION = "session";
 
-	// atributos
+	//Declaración de los atributos de clase
 	private int id;
 	private int fromVisit;
 	private int placeId;
@@ -28,7 +36,7 @@ public class HistoryVisit implements IJdbcTableBean{
 	private int visitType;
 	private int session;
 
-	// métodos getter
+	//DECLARACIÓN DE MÉTODOS GETTERS
 	public int getId() {
 		return id;
 	}
@@ -53,7 +61,7 @@ public class HistoryVisit implements IJdbcTableBean{
 		return session;
 	}
 
-	// métodos setter
+	//DECLARACIÓN DE MÉTODOS SETTERS
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -78,6 +86,9 @@ public class HistoryVisit implements IJdbcTableBean{
 		this.session = session;
 	}
 
+	/**
+	 * Obtiene los valores del resultset.
+	 */
 	public void readResultSet(ResultSet rs) throws SQLException {
 
 		id = rs.getInt(HISTORY_VISIT_ID);
@@ -88,10 +99,16 @@ public class HistoryVisit implements IJdbcTableBean{
 		session = rs.getInt(HISTORY_VISIT_SESSION);
 	}
 
+	/**
+	 * Devuelve el nombre de su propia tabla
+	 */
 	public String getTableName(){
 		return HISTORY_VISIT_TABLE_NAME;
 	}
 	
+	/**
+	 * Clona la instancia actual de la clase
+	 */
 	public HistoryVisit clone(){
 		HistoryVisit clone=new HistoryVisit();
 		clone.setId(id);

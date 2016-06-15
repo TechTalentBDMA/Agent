@@ -11,29 +11,51 @@ import upc.bdam.agent.files.tika.FilesAnalizer;
 import upc.bdam.agent.files.tika.beans.IMimeTypes;
 import upc.bdam.agent.files.tika.beans.TikaFileBean;
 
+/**
+ * Gestor especializado en la búsqueda de contenidos del dispositivo del usuario
+ * @author Grupo 9: 
+ *           - Antolín Barrena Rico
+ *           - Carles Castillejo
+ *           - Raffaele Ghermandi
+ *           - David Pérez Rodríguez
+ *
+ */
 public class LocalAnalysis {
 
-	FilesAnalizer filesAnalizer = new FilesAnalizer();
+	//se obtiene el path que se debe analizar con Tika
 	String tikaLocation = PropertiesLoader.getInstance()
 			.getProperty(PropertiesLoader.PROPERTIES_LOADER_TIKA_LOCATION);
 	
+	/**
+	 * Obtiene todas las URL's almacenadas en la BBDD del navegador.
+	 * @return
+	 */
 	public List<URL> browserAnalysis() {
-		return getMozillaURIS();
-	}
-
-	private List<URL> getMozillaURIS() {
 		BrowserAnalizer browserAnalizer = new MozillaBrowserAnalizer();
 		return browserAnalizer.getPlaces();
 	}
 
+	/**
+	 * Procesa los ficheros PDF existentes en el PATH
+	 * @return
+	 */
 	public List<TikaFileBean> getPdfFiles() {
+		FilesAnalizer filesAnalizer = new FilesAnalizer();
 		List<TikaFileBean> pdfs = new ArrayList<TikaFileBean>();
 		pdfs = filesAnalizer.getFiles(tikaLocation, IMimeTypes.MIME_PDF_TYPE);
 		return pdfs;
 	}
 	
+	/**
+	 * Procesa los ficheros de audio existnetes en el PATH
+	 * @return
+	 */
 	public List<TikaFileBean> getMp3Files() {
+		FilesAnalizer filesAnalizer = new FilesAnalizer();
 		List<TikaFileBean> mp3 = new ArrayList<TikaFileBean>();
+		
+		//Se buscan los ficheros de audio por cada uno de los posibles mime type 
+		//que definen un fichero de audio.
 		mp3.addAll(filesAnalizer.getFiles(tikaLocation, IMimeTypes.MIME_MP3_1_TYPE));
 		mp3.addAll(filesAnalizer.getFiles(tikaLocation, IMimeTypes.MIME_MP3_2_TYPE));
 		mp3.addAll(filesAnalizer.getFiles(tikaLocation, IMimeTypes.MIME_MP3_3_TYPE));

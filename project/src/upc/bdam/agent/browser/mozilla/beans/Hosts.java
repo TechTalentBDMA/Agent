@@ -5,8 +5,21 @@ import java.sql.SQLException;
 
 import upc.bdam.agent.jdbc.IJdbcTableBean;
 
-public class Hosts implements IJdbcTableBean {
 
+/**
+ * 
+ * Hosts. Bean para guardar los datos de la tabla Hosts.
+ * Finalmente no se utiliza para el piloto
+ * 
+ * @author Grupo 9: 
+ *           - Antolín Barrena Rico
+ *           - Carles Castillejo
+ *           - Raffaele Ghermandi
+ *           - David Pérez Rodríguez
+ *
+ */
+public class Hosts implements IJdbcTableBean {
+	//Declaración del nombre de los campos de la tabla en la BBDD del navegador
 	public static final String HOST_TABLE_NAME="moz_hosts";
 	public static final String HOSTS_ID = "id";
 	public static final String HOSTS_HOST = "host";
@@ -14,13 +27,14 @@ public class Hosts implements IJdbcTableBean {
 	public static final String HOSTS_TYPED = "TYPED";
 	public static final String HOSTS_PREFIX = "prefix";
 
+	//Declaración de los atributos de clase
 	private int id;
 	private String host;
 	private int frecency;
 	private int typed;
 	private String prefix;
 
-	// getters
+	//DECLARACIÓN DE MÉTODOS SETTERS
 	public int getId() {
 		return id;
 	}
@@ -41,7 +55,7 @@ public class Hosts implements IJdbcTableBean {
 		return prefix;
 	}
 
-	// setters
+	//DECLARACIÓN DE MÉTODOS SETTERS
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -62,6 +76,9 @@ public class Hosts implements IJdbcTableBean {
 		this.prefix = prefix;
 	}
 
+	/**
+	 * Obtiene los valores del resultset.
+	 */
 	public void readResultSet(ResultSet rs) throws SQLException {
 		id = rs.getInt(HOSTS_ID);
 		host = rs.getString(HOSTS_HOST);
@@ -70,10 +87,16 @@ public class Hosts implements IJdbcTableBean {
 		prefix = rs.getString(HOSTS_PREFIX);
 	}
 
+	/**
+	 * Devuelve el nombre de su propia tabla
+	 */
 	public String getTableName() {
 		return HOST_TABLE_NAME;
 	}
-	
+
+	/**
+	 * Clona la instancia actual de la clase
+	 */
 	public Hosts clone(){
 		Hosts clone=new Hosts();
 		clone.setId(id);

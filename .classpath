@@ -13,5 +13,7 @@
 	<classpathentry kind="lib" path="project/lib/tika/tika-app-1.12.jar"/>
 	<classpathentry kind="lib" path="project/lib/WebSphinx/websphinx.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/sorel/git/upc/LocalAgent/project/lib/mongodb/mongo-java-driver/3.2.0/mongo-java-driver-3.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sorel/git/upc/LocalAgent/project/lib/mongodb/mongo-java-driver/3.2.0/mongo-java-driver-3.2.0-sources.jar"/>
 	<classpathentry kind="output" path="project/bin"/>
 </classpath>

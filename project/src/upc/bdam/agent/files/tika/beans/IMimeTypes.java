@@ -1,5 +1,15 @@
 package upc.bdam.agent.files.tika.beans;
 
+
+/**
+ * Interfaz de definición de constantes para la identificación de mime types
+ * @author Grupo 9: 
+ *           - Antolín Barrena Rico
+ *           - Carles Castillejo
+ *           - Raffaele Ghermandi
+ *           - David Pérez Rodríguez
+ *
+ */
 public interface IMimeTypes {
 	
 	public static final String MIME_PDF_TYPE = "application/pdf";
@@ -14,10 +24,4 @@ public interface IMimeTypes {
 	public static final String MIME_MP3_10_TYPE = "audio/mpg";
 	public static final String MIME_MP3_11_TYPE = "audio/x-mpg";
 	public static final String MIME_MP3_12_TYPE = "audio/x-mpegaudio";
-	
-
-// 	audio/mpeg3
-// 	audio/x-mpeg-3
-// 	video/mpeg
-// 	video/x-mpeg
 }

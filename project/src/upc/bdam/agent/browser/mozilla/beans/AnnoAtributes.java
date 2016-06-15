@@ -7,12 +7,13 @@ import upc.bdam.agent.jdbc.IJdbcTableBean;
 
 /**
  *
- * Annotation Attributes
+ * Annotation Attributes. Bean para guardar los datos de la tabla Attributes.
+ * Finalmente no se utiliza para el piloto
  *
  */
-public class AnnoAtributes implements IJdbcTableBean{
+public class AnnoAtributes implements IJdbcTableBean {
 
-	public static final String ANNO_ATRIBUTES_TABLE_NAME="moz_anno_attributes";
+	public static final String ANNO_ATRIBUTES_TABLE_NAME = "moz_anno_attributes";
 	public static final String ANNO_ATRIBUTES_ID = "id";
 	public static final String ANNO_ATRIBUTES_NAME = "name";
 
@@ -20,18 +21,16 @@ public class AnnoAtributes implements IJdbcTableBean{
 	private int id;
 	private String name;
 
-	//getters
+	// getters
 	public int getId() {
 		return id;
 	}
-
 
 	public String getName() {
 		return name;
 	}
 
-
-	//setters
+	// setters
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -40,19 +39,26 @@ public class AnnoAtributes implements IJdbcTableBean{
 		this.name = name;
 	}
 
-
+	/**
+	 * Obtiene los valores del resultset.
+	 */
 	public void readResultSet(ResultSet rs) throws SQLException {
-
 		id = rs.getInt(ANNO_ATRIBUTES_ID);
 		name = rs.getString(ANNO_ATRIBUTES_NAME);
 	}
 
-	public String getTableName(){
+	/**
+	 * Devuelve el nombre de su propia tabla
+	 */
+	public String getTableName() {
 		return ANNO_ATRIBUTES_TABLE_NAME;
 	}
-	
-	public AnnoAtributes clone(){
-		AnnoAtributes clone =new AnnoAtributes();
+
+	/**
+	 * Clona la instancia actual de la clase
+	 */
+	public AnnoAtributes clone() {
+		AnnoAtributes clone = new AnnoAtributes();
 		clone.setId(id);
 		clone.setName(name);
 		return clone;

@@ -5,8 +5,20 @@ import java.sql.SQLException;
 
 import upc.bdam.agent.jdbc.IJdbcTableBean;
 
+/**
+ * 
+ * Places. Bean para guardar los datos de la tabla Places en la que se almacena la dirección de todas las páginas 
+ * web visitadas por el usuario.
+ * 
+ * @author Grupo 9: 
+ *           - Antolín Barrena Rico
+ *           - Carles Castillejo
+ *           - Raffaele Ghermandi
+ *           - David Pérez Rodríguez
+ *
+ */
 public class Places implements IJdbcTableBean{
-
+	//Declaración del nombre de los campos de la tabla en la BBDD del navegador
 	public static final String PLACES_TABLE_NAME= "moz_places";
 	public static final String PLACES_ID = "id";
 	public static final String PLACES_URL = "url";
@@ -21,7 +33,7 @@ public class Places implements IJdbcTableBean{
 	public static final String PLACES_GUID = "guid";
 	public static final String PLACES_FOREIGN_COUNT = "foreign_count";
 
-	// atributos
+	//Declaración de los atributos de clase
 	private int id;
 	private String url;
 	private String title;
@@ -35,7 +47,7 @@ public class Places implements IJdbcTableBean{
 	private String guid;
 	private int foreignCount;
 
-	// getters
+	//DECLARACIÓN DE MÉTODOS GETTERS
 	public int getId() {
 		return id;
 	}
@@ -84,7 +96,7 @@ public class Places implements IJdbcTableBean{
 		return foreignCount;
 	}
 
-	// setters
+	//DECLARACIÓN DE MÉTODOS SETTERS
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -133,6 +145,9 @@ public class Places implements IJdbcTableBean{
 		this.foreignCount = foreignCount;
 	}
 
+	/**
+	 * Obtiene los valores del resultset.
+	 */
 	public void readResultSet(ResultSet rs) throws SQLException {
 
 		id = rs.getInt(PLACES_ID);
@@ -149,10 +164,16 @@ public class Places implements IJdbcTableBean{
 		foreignCount = rs.getInt(PLACES_FOREIGN_COUNT);
 	}
 
+	/**
+	 * Devuelve el nombre de su propia tabla
+	 */
 	public String getTableName(){
 		return PLACES_TABLE_NAME;
 	}
-	
+
+	/**
+	 * Clona la instancia actual de la clase
+	 */
 	public Places clone(){
 		Places clone=new Places();
 		clone.setId(id);

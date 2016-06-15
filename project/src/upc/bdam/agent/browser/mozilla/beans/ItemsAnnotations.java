@@ -5,8 +5,20 @@ import java.sql.SQLException;
 
 import upc.bdam.agent.jdbc.IJdbcTableBean;
 
+/**
+ * 
+ * ItemsAnnotations. Bean para guardar los datos de la tabla ItemsAnnotations.
+ * Finalmente no se utiliza para el piloto
+ * 
+ * @author Grupo 9: 
+ *           - Antolín Barrena Rico
+ *           - Carles Castillejo
+ *           - Raffaele Ghermandi
+ *           - David Pérez Rodríguez
+ *
+ */
 public class ItemsAnnotations implements IJdbcTableBean {
-
+	//Declaración del nombre de los campos de la tabla en la BBDD del navegador
 	public static final String ITEMS_ANNOTATIONS_TABLE_NAME="moz_items_annos";
 	public static final String ITEMS_ANNOTATIONS_ID = "ID";
 	public static final String ITEMS_ANNOTATIONS_ITEM_ID = "item_id";
@@ -18,6 +30,7 @@ public class ItemsAnnotations implements IJdbcTableBean {
 	public static final String ITEMS_ANNOTATIONS_DATE_ADDED = "dateAdded";
 	public static final String ITEMS_ANNOTATIONS_LAST_MODIFIED = "lastModified";
 
+	//Declaración de los atributos de clase
 	private int id;
 	private int itemId;
 	private int annoAttribute;
@@ -29,7 +42,7 @@ public class ItemsAnnotations implements IJdbcTableBean {
 	private int dateAdded;
 	private int lastModified;
 
-	// getters
+	//DECLARACIÓN DE MÉTODOS GETTERS
 	public int getId() {
 		return id;
 	}
@@ -70,7 +83,7 @@ public class ItemsAnnotations implements IJdbcTableBean {
 		return lastModified;
 	}
 
-	// setters
+	//DECLARACIÓN DE MÉTODOS SETTERS
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -111,6 +124,9 @@ public class ItemsAnnotations implements IJdbcTableBean {
 		this.lastModified = lastModified;
 	}
 
+	/**
+	 * Obtiene los valores del resultset.
+	 */
 	public void readResultSet(ResultSet rs) throws SQLException {
 		id = rs.getInt(ITEMS_ANNOTATIONS_ID);
 		itemId = rs.getInt(ITEMS_ANNOTATIONS_ITEM_ID);
@@ -123,10 +139,16 @@ public class ItemsAnnotations implements IJdbcTableBean {
 		lastModified = rs.getInt(ITEMS_ANNOTATIONS_LAST_MODIFIED);
 	}
 
+	/**
+	 * Devuelve el nombre de su propia tabla
+	 */
 	public String getTableName(){
 		return ITEMS_ANNOTATIONS_TABLE_NAME;
 	}
-	
+
+	/**
+	 * Clona la instancia actual de la clase
+	 */
 	public ItemsAnnotations clone(){
 		ItemsAnnotations clone=new ItemsAnnotations();
 		clone.setId(id);

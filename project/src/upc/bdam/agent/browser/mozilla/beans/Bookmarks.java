@@ -5,8 +5,21 @@ import java.sql.SQLException;
 
 import upc.bdam.agent.jdbc.IJdbcTableBean;
 
+/**
+ * 
+ * Bookmarks. Bean para guardar los datos de la tabla Bookmarks.
+ * Finalmente no se utiliza para el piloto
+ * 
+ * @author Grupo 9: 
+ *           - Antolín Barrena Rico
+ *           - Carles Castillejo
+ *           - Raffaele Ghermandi
+ *           - David Pérez Rodríguez
+ *
+ */
 public class Bookmarks implements IJdbcTableBean {
 
+	//Declaración del nombre de los campos de la tabla en la BBDD del navegador
 	public static final String BOOKMARKS_TABLE_NAME="moz_bookmarks";
 	public static final String BOOKMARKS_ID = "id";
 	public static final String BOOKMARKS_TYPE = "type";
@@ -20,6 +33,7 @@ public class Bookmarks implements IJdbcTableBean {
 	public static final String BOOKMARKS_LAST_MODIFIED = "lastModified";
 	public static final String BOOKMARKS_GUID = "guid";
 
+	//Declaración de los atributos de clase
 	private int id;
 	private int type;
 	private int fk;
@@ -32,8 +46,8 @@ public class Bookmarks implements IJdbcTableBean {
 	private int lastModified;
 	private String guid;
 
+	//DECLARACIÓN DE MÉTODOS GETTER
 	public int getId() {
-		//prueba de commit
 		return id;
 	}
 
@@ -77,6 +91,7 @@ public class Bookmarks implements IJdbcTableBean {
 		return guid;
 	}
 
+	//DECLARACIÓN DE MÉTODOS SETTERS
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -121,6 +136,10 @@ public class Bookmarks implements IJdbcTableBean {
 		this.guid = guid;
 	}
 
+	
+	/**
+	 * Obtiene los valores del resultset.
+	 */
 	public void readResultSet(ResultSet rs) throws SQLException {
 		id = rs.getInt(BOOKMARKS_ID);
 		type = rs.getInt(BOOKMARKS_TYPE);
@@ -136,10 +155,17 @@ public class Bookmarks implements IJdbcTableBean {
 
 	}
 
+	/**
+	 * Devuelve el nombre de su propia tabla
+	 */
 	public String getTableName(){
 		return BOOKMARKS_TABLE_NAME;
 	}
 	
+	
+	/**
+	 * Clona la instancia actual de la clase
+	 */
 	public Bookmarks clone(){
 		Bookmarks clone=new Bookmarks();
 		clone.setId(id);

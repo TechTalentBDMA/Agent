@@ -12,19 +12,38 @@ import java.nio.file.WatchService;
 
 import upc.bdam.agent.config.PropertiesLoader;
 
+/**
+ * Clase de utilidad para vigilar los cambios producidos en un directorio específico
+ * 
+ * @author Grupo 9: 
+ *           - Antolín Barrena Rico
+ *           - Carles Castillejo
+ *           - Raffaele Ghermandi
+ *           - David Pérez Rodríguez
+ *
+ */
 public class WatchGuard implements Runnable {
-
+	//path a vigilar
 	private String path = null;
 
+	/**
+	 * constructor de clase
+	 */
 	public WatchGuard() {
 		init();
 	}
 
+	/**
+	 * Inicialización de las propiedades de la clase
+	 */
 	private void init() {
 		String watchguardLocation = PropertiesLoader.PROPERTIES_LOADER_WATCHGUARD_LOCATION;
 		path = PropertiesLoader.getInstance().getProperty(watchguardLocation);
 	}
 
+	/**
+	 * Ejecución de las acciones asociadas al hilo
+	 */
 	public void run() {
 
 		try {

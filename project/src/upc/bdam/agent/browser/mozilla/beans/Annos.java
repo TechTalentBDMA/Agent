@@ -6,12 +6,20 @@ import java.sql.SQLException;
 import upc.bdam.agent.jdbc.IJdbcTableBean;
 
 /**
- * Annotations
- *
+ * 
+ * Annos. Bean para guardar los datos de la tabla Annos.
+ * Finalmente no se utiliza para el piloto
+ * 
+ * @author Grupo 9: 
+ *           - Antolín Barrena Rico
+ *           - Carles Castillejo
+ *           - Raffaele Ghermandi
+ *           - David Pérez Rodríguez
  *
  */
 public class Annos implements IJdbcTableBean {
 
+	//Declaración del nombre de los campos de la tabla en la BBDD del navegador
 	public static final String ANNO_TABLE_NAME="moz_annos";
 	public static final String ANNO_ID = "id";
 	public static final String ANNO_PLACED_ID = "place_id";
@@ -23,6 +31,7 @@ public class Annos implements IJdbcTableBean {
 	public static final String ANNO_DATE_ADDED = "dateAdded";
 	public static final String ANNO_LAST_MODIFIED = "lastModified";
 
+	//Declaración de los atributos de clase
 	private int id;
 	private int placeId;
 	private int annoAttributeId;
@@ -33,6 +42,7 @@ public class Annos implements IJdbcTableBean {
 	private int dateAdded;
 	private int lastModified;
 
+	//DECLARACIÓN DE MÉTODOS GETTER
 	public int getId() {
 		return id;
 	}
@@ -69,6 +79,8 @@ public class Annos implements IJdbcTableBean {
 		return lastModified;
 	}
 
+	
+	//DECLARACIÓN DE MÉTODOS SETTER
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -105,6 +117,9 @@ public class Annos implements IJdbcTableBean {
 		this.lastModified = lastModified;
 	}
 
+	/**
+	 * Obtiene los valores del resultset.
+	 */
 	public void readResultSet(ResultSet rs) throws SQLException {
 
 		id=rs.getInt(ANNO_ID);
@@ -118,10 +133,17 @@ public class Annos implements IJdbcTableBean {
 		lastModified=rs.getInt(ANNO_LAST_MODIFIED);
 	}
 
+	
+	/**
+	 * Devuelve el nombre de su propia tabla
+	 */
 	public String getTableName(){
 		return ANNO_TABLE_NAME;
 	}
 	
+	/**
+	 * Clona la instancia actual de la clase
+	 */
 	public Annos clone(){
 		Annos clone=new Annos();
 		clone.setId(id);
