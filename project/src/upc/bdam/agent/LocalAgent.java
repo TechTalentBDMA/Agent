@@ -1,5 +1,7 @@
 package upc.bdam.agent;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -28,18 +30,11 @@ import websphinx.Link;
 public class LocalAgent {
 
 	//se instancia el gestor de reopilación 
-	private static LocalAnalysis localAnalysis;
+	private static LocalAnalysis localAnalysis= new LocalAnalysis();
 
 	
 	public static void main(String[] args) throws Exception {
-		//se inicia el demonio de vigilancia de la estructura de directorios seleccionado
-		doWatch();
-		
-		
-		localAnalysis = new LocalAnalysis();		
-		filesAnalysis();
-		browseAnalysis();
-
+		menu();
 	}
 
 	/**
@@ -79,7 +74,7 @@ public class LocalAgent {
 	 * 
 	 * Se recopila cada tipo de ficheros de forma independente
 	 */
-	public static void filesAnalysis() {
+	private static void filesAnalysis() {
 		DocumentDataSource dataSource=new DocumentDataSource();
 		
 		List<TikaFileBean> ficherosPDF = localAnalysis.getPdfFiles();
@@ -99,10 +94,58 @@ public class LocalAgent {
 	/**
 	 * Se lanza un proceso para vigilar la modificación de documentos en el directorio seleccionado
 	 */
-	public static void doWatch(){
+	private static void doWatch(){
 		
 		WatchGuard guard=new WatchGuard();
 		Thread a=new Thread(guard);
 		a.start();	
 	}
+	
+	
+	/**
+	 * Muestra un pequeño menú para poder observar cada una de las cargas de forma independiente
+	 */
+	private static void menu(){
+		int opcion=0;
+
+		//se inicia el demonio de vigilancia de la estructura de directorios seleccionado
+		doWatch();
+
+		do{
+			String salida=new String();
+			salida+="\n***********************************************\n";
+			salida+="* Que acción de las siguientes desea realizar:  *\n";
+			salida+="* 1- Análisis de ficheros                       *\n";
+			salida+="* 2- Análisis de navegador                      *\n";
+			salida+="* 3- Envío Kafka                                *\n";
+			salida+="* 4- Salir                                      *\n";
+			salida+="*************************************************\n";
+
+			System.out.println(salida);
+
+			try {
+				BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
+			    String aux = bufferRead.readLine();
+				opcion=Integer.parseInt(aux);
+			}catch (Exception ex){
+				System.out.println("Se produjo un error leyendo la opción. Elija de nuevo\n");
+				continue;
+			}
+
+			if (opcion<0 || opcion>3){
+				System.out.println("Opcion incorrecta. Elija de nuevo\n");
+				continue;
+			}else if (opcion==3)
+				System.exit(0);
+			else if (opcion==1)
+				filesAnalysis();
+			else if (opcion==2)
+				browseAnalysis();
+			else if (opcion==3)
+				continue;
+		}while (true);
+	
+	}
+	
+	
 }
