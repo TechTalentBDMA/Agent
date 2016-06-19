@@ -7,16 +7,12 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import org.apache.kafka.common.record.KafkaLZ4BlockInputStream;
-
 import upc.bdam.agent.analysis.LocalAnalysis;
 import upc.bdam.agent.crawler.SiteDownloadingCrawler;
-import upc.bdam.agent.files.tika.beans.TikaFileBean;
 import upc.bdam.agent.files.watchGuard.WatchGuard;
 import upc.bdam.agent.kafka.AgentProducer;
 import upc.bdam.agent.kafka.KafkaBean;
 import upc.bdam.agent.kafka.KafkaEncoder;
-import upc.bdam.recommender.documentDDBB.dao.DocumentDataSource;
 import websphinx.Link;
 
 /**

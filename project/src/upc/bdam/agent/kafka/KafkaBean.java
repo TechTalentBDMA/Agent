@@ -11,12 +11,17 @@ package upc.bdam.agent.kafka;
  */
 public class KafkaBean {
 
-	//declaración de atributos
-	public String metadata;
-	public String content;
+	//declaración de atributos	
+	private String metadata;
+	private String content;
+	private String id=new String();
 
-
-
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	//DECLARACIÓN DE MÉTODOS GETTERS
 	public String getMetadata() {
 		return metadata;

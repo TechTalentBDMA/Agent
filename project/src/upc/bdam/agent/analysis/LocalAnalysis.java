@@ -9,7 +9,6 @@ import upc.bdam.agent.browser.mozilla.MozillaBrowserAnalizer;
 import upc.bdam.agent.config.PropertiesLoader;
 import upc.bdam.agent.files.tika.FilesAnalizer;
 import upc.bdam.agent.files.tika.beans.IMimeTypes;
-import upc.bdam.agent.files.tika.beans.TikaFileBean;
 import upc.bdam.agent.kafka.KafkaBean;
 
 /**

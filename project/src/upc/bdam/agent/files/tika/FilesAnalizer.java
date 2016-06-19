@@ -15,7 +15,6 @@ import org.apache.tika.parser.Parser;
 import org.apache.tika.sax.BodyContentHandler;
 import org.xml.sax.SAXException;
 
-import upc.bdam.agent.files.tika.beans.TikaFileBean;
 import upc.bdam.agent.kafka.KafkaBean;
 
 /**
@@ -49,7 +48,7 @@ public class FilesAnalizer {
 		
 		//una vez recuperados los ficheros se itera sobre ellos mostrando sus propiedades
 		Iterator<String> itr = fsc.iterator();
-		TikaFileBean tikaFile = new TikaFileBean();
+		KafkaBean kafkaBean = new KafkaBean();
 
 		while (itr.hasNext()) {
 			try {
@@ -80,9 +79,9 @@ public class FilesAnalizer {
 				System.out
 						.println("====================================================");
 				metadata.get("creator");
-				tikaFile.setContent(handler.toString());
-				tikaFile.setMetadata(metadata.toString());
-				ficheros.add(tikaFile);
+				kafkaBean.setContent(handler.toString());
+				kafkaBean.setMetadata(metadata.toString());
+				ficheros.add(kafkaBean);
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {

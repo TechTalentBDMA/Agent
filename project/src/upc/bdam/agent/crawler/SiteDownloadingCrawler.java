@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.net.URL;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import upc.bdam.agent.config.PropertiesLoader;
 import upc.bdam.agent.kafka.AgentProducer;
@@ -76,6 +74,7 @@ public class SiteDownloadingCrawler extends AgentCrawler {
 		bean.setContent(new String(page.getContentBytes()));
 		
 		byte[] kafkaInfo=encoder.serialize(bean);
+		bean=encoder.deserialize(kafkaInfo);
 		producer.produce(kafkaInfo);
 	}
 	
