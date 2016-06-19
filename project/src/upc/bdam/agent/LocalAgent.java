@@ -7,10 +7,15 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.apache.kafka.common.record.KafkaLZ4BlockInputStream;
+
 import upc.bdam.agent.analysis.LocalAnalysis;
 import upc.bdam.agent.crawler.SiteDownloadingCrawler;
 import upc.bdam.agent.files.tika.beans.TikaFileBean;
 import upc.bdam.agent.files.watchGuard.WatchGuard;
+import upc.bdam.agent.kafka.AgentProducer;
+import upc.bdam.agent.kafka.KafkaBean;
+import upc.bdam.agent.kafka.KafkaEncoder;
 import upc.bdam.recommender.documentDDBB.dao.DocumentDataSource;
 import websphinx.Link;
 
@@ -75,12 +80,19 @@ public class LocalAgent {
 	 * Se recopila cada tipo de ficheros de forma independente
 	 */
 	private static void filesAnalysis() {
-		DocumentDataSource dataSource=new DocumentDataSource();
+		AgentProducer producer=new AgentProducer();
+		KafkaEncoder encoder=new KafkaEncoder();
 		
-		List<TikaFileBean> ficherosPDF = localAnalysis.getPdfFiles();
+//		DocumentDataSource dataSource=new DocumentDataSource();
 		
-		List<TikaFileBean> ficherosMP3 = localAnalysis.getMp3Files();
+		List<KafkaBean> ficherosPDF = localAnalysis.getPdfFiles();
+		
+		List<KafkaBean> ficherosMP3 = localAnalysis.getMp3Files();
 
+		KafkaBean aux=ficherosPDF.get(0);
+
+		byte[] kafkaInfo=encoder.serialize(aux);
+		producer.produce(kafkaInfo);
 		//código a eliminar. Inserta en una BBDD similar a lo que se espera en el consumer de kafka
 		//for (TikaFileBean fichero: ficherosPDF){
 		//	dataSource.insertTika(fichero);
@@ -106,6 +118,7 @@ public class LocalAgent {
 	 * Muestra un pequeño menú para poder observar cada una de las cargas de forma independiente
 	 */
 	private static void menu(){
+
 		int opcion=0;
 
 		//se inicia el demonio de vigilancia de la estructura de directorios seleccionado
@@ -117,8 +130,7 @@ public class LocalAgent {
 			salida+="* Que acción de las siguientes desea realizar:  *\n";
 			salida+="* 1- Análisis de ficheros                       *\n";
 			salida+="* 2- Análisis de navegador                      *\n";
-			salida+="* 3- Envío Kafka                                *\n";
-			salida+="* 4- Salir                                      *\n";
+			salida+="* 3- Salir                                      *\n";
 			salida+="*************************************************\n";
 
 			System.out.println(salida);
@@ -141,8 +153,6 @@ public class LocalAgent {
 				filesAnalysis();
 			else if (opcion==2)
 				browseAnalysis();
-			else if (opcion==3)
-				continue;
 		}while (true);
 	
 	}

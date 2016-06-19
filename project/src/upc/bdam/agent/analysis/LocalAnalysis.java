@@ -10,6 +10,7 @@ import upc.bdam.agent.config.PropertiesLoader;
 import upc.bdam.agent.files.tika.FilesAnalizer;
 import upc.bdam.agent.files.tika.beans.IMimeTypes;
 import upc.bdam.agent.files.tika.beans.TikaFileBean;
+import upc.bdam.agent.kafka.KafkaBean;
 
 /**
  * Gestor especializado en la búsqueda de contenidos del dispositivo del usuario
@@ -39,9 +40,9 @@ public class LocalAnalysis {
 	 * Procesa los ficheros PDF existentes en el PATH
 	 * @return
 	 */
-	public List<TikaFileBean> getPdfFiles() {
+	public List<KafkaBean> getPdfFiles() {
 		FilesAnalizer filesAnalizer = new FilesAnalizer();
-		List<TikaFileBean> pdfs = new ArrayList<TikaFileBean>();
+		List<KafkaBean> pdfs = new ArrayList<KafkaBean>();
 		pdfs = filesAnalizer.getFiles(tikaLocation, IMimeTypes.MIME_PDF_TYPE);
 		return pdfs;
 	}
@@ -50,9 +51,9 @@ public class LocalAnalysis {
 	 * Procesa los ficheros de audio existnetes en el PATH
 	 * @return
 	 */
-	public List<TikaFileBean> getMp3Files() {
+	public List<KafkaBean> getMp3Files() {
 		FilesAnalizer filesAnalizer = new FilesAnalizer();
-		List<TikaFileBean> mp3 = new ArrayList<TikaFileBean>();
+		List<KafkaBean> mp3 = new ArrayList<KafkaBean>();
 		
 		//Se buscan los ficheros de audio por cada uno de los posibles mime type 
 		//que definen un fichero de audio.

@@ -16,6 +16,7 @@ import org.apache.tika.sax.BodyContentHandler;
 import org.xml.sax.SAXException;
 
 import upc.bdam.agent.files.tika.beans.TikaFileBean;
+import upc.bdam.agent.kafka.KafkaBean;
 
 /**
  * Se procesa el contenido de los ficheros existentes en un determinado path
@@ -36,10 +37,10 @@ public class FilesAnalizer {
 	 * @param mimeType de los ficheros que se deben procesar 
 	 * @return
 	 */
-	public List<TikaFileBean> getFiles(String path, String mimeType) {
+	public List<KafkaBean> getFiles(String path, String mimeType) {
 		
 		//lista en la que se guardan los ficheros obtenidos
-		List<TikaFileBean> ficheros = new ArrayList<TikaFileBean>();
+		List<KafkaBean> ficheros = new ArrayList<KafkaBean>();
 		
 		//clase de utilidad para la obtención de los ficheros
 		ListFilesUtil listFilesUtil = new ListFilesUtil();
@@ -79,8 +80,8 @@ public class FilesAnalizer {
 				System.out
 						.println("====================================================");
 				metadata.get("creator");
-				tikaFile.setContent(handler.toString().getBytes());
-				tikaFile.setMetadata(metadata.toString().getBytes());
+				tikaFile.setContent(handler.toString());
+				tikaFile.setMetadata(metadata.toString());
 				ficheros.add(tikaFile);
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
