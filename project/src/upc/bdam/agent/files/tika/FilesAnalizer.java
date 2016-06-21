@@ -49,6 +49,7 @@ public class FilesAnalizer {
 		//una vez recuperados los ficheros se itera sobre ellos mostrando sus propiedades
 		Iterator<String> itr = fsc.iterator();
 		KafkaBean kafkaBean = new KafkaBean();
+		kafkaBean.setMimeType(mimeType);
 
 		while (itr.hasNext()) {
 			try {
