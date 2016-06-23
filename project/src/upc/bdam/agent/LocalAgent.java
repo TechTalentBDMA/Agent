@@ -85,14 +85,15 @@ public class LocalAgent {
 		
 		List<KafkaBean> ficherosMP3 = localAnalysis.getMp3Files();
 
-		KafkaBean aux=ficherosPDF.get(0);
+//		KafkaBean aux=ficherosPDF.get(0);
 
-		byte[] kafkaInfo=encoder.serialize(aux);
-		producer.produce(kafkaInfo);
+
 		//código a eliminar. Inserta en una BBDD similar a lo que se espera en el consumer de kafka
-		//for (TikaFileBean fichero: ficherosPDF){
+		for (KafkaBean fichero: ficherosPDF){
+			byte[] kafkaInfo=encoder.serialize(fichero);
+			producer.produce(kafkaInfo);
 		//	dataSource.insertTika(fichero);
-		//}
+		}
 		
 		System.out.println("EL NÚMERO DE FICHEROS PDF ES: " + ficherosPDF.size());
 		System.out.println("EL NÚMERO DE FICHEROS MP3 ES: " + ficherosMP3.size());

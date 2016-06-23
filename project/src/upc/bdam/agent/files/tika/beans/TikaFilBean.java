@@ -9,4 +9,4 @@ package upc.bdam.agent.files.tika.beans;
  *           - David Pérez Rodríguez
  *
  */
-public class TikaFileBean {}
+public class TikaFilBean {}
