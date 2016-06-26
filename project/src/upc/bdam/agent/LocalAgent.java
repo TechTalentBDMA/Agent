@@ -13,6 +13,7 @@ import upc.bdam.agent.files.watchGuard.WatchGuard;
 import upc.bdam.agent.kafka.AgentProducer;
 import upc.bdam.agent.kafka.KafkaBean;
 import upc.bdam.agent.kafka.KafkaEncoder;
+import upc.bdam.recommender.documentDDBB.dao.DocumentDataSource;
 import websphinx.Link;
 
 /**
@@ -79,7 +80,7 @@ public class LocalAgent {
 		AgentProducer producer=new AgentProducer();
 		KafkaEncoder encoder=new KafkaEncoder();
 		
-//		DocumentDataSource dataSource=new DocumentDataSource();
+		DocumentDataSource dataSource=new DocumentDataSource();
 		
 		List<KafkaBean> ficherosPDF = localAnalysis.getPdfFiles();
 		
@@ -91,8 +92,8 @@ public class LocalAgent {
 		//código a eliminar. Inserta en una BBDD similar a lo que se espera en el consumer de kafka
 		for (KafkaBean fichero: ficherosPDF){
 			byte[] kafkaInfo=encoder.serialize(fichero);
-			producer.produce(kafkaInfo);
-		//	dataSource.insertTika(fichero);
+		//	producer.produce(kafkaInfo);
+			dataSource.insertTika(fichero);
 		}
 		
 		System.out.println("EL NÚMERO DE FICHEROS PDF ES: " + ficherosPDF.size());

@@ -19,7 +19,7 @@ public class KafkaBean {
 	
 	private static final String USER_DATA_NICK_NAME="nickName";
 	private static final String USER_DATA_NICK="name";
-	private static final String USER_DATA_SURNAME="name";
+	private static final String USER_DATA_SURNAME="surname";
 	private static final String USER_DATA_BORN="born";	
 	private static final String USER_DATA_SEX="sex";
 	private static final String USER_DATA_PROFESSION="profession";
@@ -34,7 +34,15 @@ public class KafkaBean {
 	private String profession;
 	private String hobby;
 	private String interestedIn;
+	private String palabras;
 
+	public String getPalabras() {
+		return palabras;
+	}
+
+	public void setPalabras(String palabras) {
+		this.palabras = palabras;
+	}
 	//declaración de atributos	
 	private String metadata;
 	private String content;

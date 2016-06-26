@@ -80,7 +80,7 @@ public class FilesAnalizer {
 				System.out
 						.println("====================================================");
 				metadata.get("creator");
-				kafkaBean.setContent(handler.toString());
+				kafkaBean.setContent(handler.toString());				
 				kafkaBean.setMetadata(metadata.toString());
 				ficheros.add(kafkaBean);
 			} catch (FileNotFoundException e) {
@@ -95,6 +95,10 @@ public class FilesAnalizer {
 		}
 		return ficheros;
 	}
+	
+//	private KafkaBean fillKafkaBean(Metadata metadata, BodyContentHandler handler){
+//		
+//	}
 
 	/**
 	 * Se muestra por pantalla las propiedades de metadatos del fichero. Inicialmente se muestran todos para evaluar la 
