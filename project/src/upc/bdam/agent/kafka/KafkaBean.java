@@ -25,8 +25,8 @@ public class KafkaBean {
 	private static final String USER_DATA_PROFESSION="profession";
 	private static final String USER_DATA_HOBBY="hobby";
 	private static final String USER_DATA_INTERESTED_IN="interestedIn";
+	
 	//declaración de atributos del usuario
-	private String nickName;
 	private String name;
 	private String surname;
 	private String born;
@@ -34,21 +34,18 @@ public class KafkaBean {
 	private String profession;
 	private String hobby;
 	private String interestedIn;
-	private String palabras;
-
-	public String getPalabras() {
-		return palabras;
-	}
-
-	public void setPalabras(String palabras) {
-		this.palabras = palabras;
-	}
+	
 	//declaración de atributos	
 	private String metadata;
 	private String content;
 	private String id=new String();
-	private byte type=0;
+	private String status=new String();
 	private String mimeType=new String();
+	private String palabras=new String();
+	private String nickName=new String();
+	private String fichero=new String();
+	private String url=new String();
+
 	
 	/**
 	 * En el constructor del bean, y a falta de interfaz gráfica que permita pedir 
@@ -66,6 +63,27 @@ public class KafkaBean {
 		interestedIn=properties.getProperty(USER_DATA_INTERESTED_IN);		
 	}
 	
+	
+	public String getUrl() {
+		return url;
+	}
+
+	public String getPalabras() {
+		return palabras;
+	}
+
+	public void setPalabras(String palabras) {
+		this.palabras = palabras;
+	}
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public String getFichero() {
+		return fichero;
+	}
+
 	public String getNickName() {
 		return nickName;
 	}
@@ -89,6 +107,17 @@ public class KafkaBean {
 	}
 	public String getInterestedIn() {
 		return interestedIn;
+	}
+	
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public void setFichero(String fichero) {
+		this.fichero = fichero;
 	}
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
@@ -121,11 +150,11 @@ public class KafkaBean {
 	public void setMimeType(String mimeType) {
 		this.mimeType = mimeType;
 	}
-	public byte getType() {
-		return type;
+	public String getType() {
+		return status;
 	}
-	public void setType(byte type) {
-		this.type = type;
+	public void setType(String type) {
+		this.status = type;
 	}
 	public String getId() {
 		return id;

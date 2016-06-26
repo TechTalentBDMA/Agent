@@ -2,37 +2,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>LocalAgent</groupId>
-	<artifactId>LocalAgent</artifactId>
+	<artifactId>projectt</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>LocalAgent</name>
 	<description>Proyecto postgrado UPC Big Data Management and Analytics</description>
-	<build>
-		<sourceDirectory>src</sourceDirectory>
-		<resources>
-			<resource>
-				<directory>src</directory>
-				<excludes>
-					<exclude>**/*.java</exclude>
-				</excludes>
-			</resource>
-			<resource>
-				<directory>project/resources</directory>
-				<excludes>
-					<exclude>**/*.java</exclude>
-				</excludes>
-			</resource>
-		</resources>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.5</version>
-				<configuration>
-					<source />
-					<target />
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+
 	<dependencies>
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -136,6 +110,18 @@
 			<groupId>org.apache.tika</groupId>
 			<artifactId>tika-parsers</artifactId>
 			<version>1.13</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.6.1</version>
 		</dependency>
 
 	</dependencies>

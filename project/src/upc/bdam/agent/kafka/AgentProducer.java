@@ -12,20 +12,25 @@ public class AgentProducer {
 
 
   public void produce(byte[] bean) {
+	  try{
+		    Map<String, Object> conf = new HashMap<String, Object>();
+		    conf.put("bootstrap.servers", "debian-kafka-vm2:9092");
+		    conf.put("group.id", "news of the day");
+		    conf.put("key.serializer", StringSerializer.class.getName());
+		    conf.put("value.serializer", ByteArraySerializer.class.getName());
+		    conf.put("value.serializer.jackson.smile", "true");
 
-    Map<String, Object> conf = new HashMap<String, Object>();
-    conf.put("bootstrap.servers", "debian-kafka-vm2:9092");
-    conf.put("group.id", "news of the day");
-    conf.put("key.serializer", StringSerializer.class.getName());
-    conf.put("value.serializer", ByteArraySerializer.class.getName());
-    conf.put("value.serializer.jackson.smile", "true");
+		    KafkaProducer<String, String> producer = new KafkaProducer<String, String>(conf);
+		    KafkaProducer<String, byte[]> agentProducer = new KafkaProducer<String, byte[]>(conf);
 
-    KafkaProducer<String, String> producer = new KafkaProducer<String, String>(conf);
-    KafkaProducer<String, byte[]> agentProducer = new KafkaProducer<String, byte[]>(conf);
+		    agentProducer.send(new ProducerRecord<String, byte[]>("home", bean));
 
-    agentProducer.send(new ProducerRecord<String, byte[]>("home", bean));
+		    agentProducer.close();
+		    producer.close();
+		  
+	  }catch (Exception ex){
+		  ex.printStackTrace();
+	  }
 
-    agentProducer.close();
-    producer.close();
   }
 }

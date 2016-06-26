@@ -3,6 +3,8 @@ package upc.bdam.agent.crawler;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
 
@@ -10,6 +12,7 @@ import upc.bdam.agent.config.PropertiesLoader;
 import upc.bdam.agent.kafka.AgentProducer;
 import upc.bdam.agent.kafka.KafkaBean;
 import upc.bdam.agent.kafka.KafkaEncoder;
+import upc.bdam.recommender.documentDDBB.dao.DocumentDataSource;
 import websphinx.Page;
 
 /**
@@ -65,16 +68,22 @@ public class SiteDownloadingCrawler extends AgentCrawler {
 		KafkaEncoder encoder=new KafkaEncoder();
 		
 		//se obtiene la URL a descargar
-//		URL url = page.getURL();
+		URL url = page.getURL();
 		KafkaBean bean=new KafkaBean();
 //		String path = url.getHost().replace('.', '-') + "/" + url.getPath().replaceFirst("/", "");
 
 //		bean.setMetadata(path);
 		bean.setContent(new String(page.getContentBytes()));
+		bean.setUrl(url.toString());
+		bean.setStatus("procesado");
+		bean.setId(Long.toString((new Date()).getTime()));
+
 		
 		byte[] kafkaInfo=encoder.serialize(bean);
+		DocumentDataSource dataSource=new DocumentDataSource();
+		dataSource.insertTika(bean);
 		bean=encoder.deserialize(kafkaInfo);
-		producer.produce(kafkaInfo);
+		//producer.produce(kafkaInfo);
 	}
 	
 //	@Override

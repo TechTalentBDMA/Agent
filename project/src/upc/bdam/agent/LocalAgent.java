@@ -92,6 +92,7 @@ public class LocalAgent {
 		//código a eliminar. Inserta en una BBDD similar a lo que se espera en el consumer de kafka
 		for (KafkaBean fichero: ficherosPDF){
 			byte[] kafkaInfo=encoder.serialize(fichero);
+			KafkaBean dese=encoder.deserialize(kafkaInfo);
 		//	producer.produce(kafkaInfo);
 			dataSource.insertTika(fichero);
 		}

@@ -37,8 +37,10 @@ public class WatchGuard implements Runnable {
 	 * Inicialización de las propiedades de la clase
 	 */
 	private void init() {
+		System.out.print("Se intenta cargar la propiedad: "+PropertiesLoader.PROPERTIES_LOADER_WATCHGUARD_LOCATION);
 		String watchguardLocation = PropertiesLoader.PROPERTIES_LOADER_WATCHGUARD_LOCATION;
 		path = PropertiesLoader.getInstance().getProperty(watchguardLocation);
+		System.out.print("Se vigilará la ubicación: "+path);		
 	}
 
 	/**

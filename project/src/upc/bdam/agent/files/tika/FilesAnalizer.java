@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -37,6 +38,7 @@ public class FilesAnalizer {
 	 * @return
 	 */
 	public List<KafkaBean> getFiles(String path, String mimeType) {
+		KafkaBean kafkaBean;
 		
 		//lista en la que se guardan los ficheros obtenidos
 		List<KafkaBean> ficheros = new ArrayList<KafkaBean>();
@@ -48,8 +50,6 @@ public class FilesAnalizer {
 		
 		//una vez recuperados los ficheros se itera sobre ellos mostrando sus propiedades
 		Iterator<String> itr = fsc.iterator();
-		KafkaBean kafkaBean = new KafkaBean();
-		kafkaBean.setMimeType(mimeType);
 
 		while (itr.hasNext()) {
 			try {
@@ -63,25 +63,25 @@ public class FilesAnalizer {
 				inputstream = new FileInputStream(filepath);
 
 				parser.parse(inputstream, handler, metadata, context);
-				System.out
-						.println("====================================================");
-				System.out
-						.println("========== METADATOS   =============================");
-				System.out
-						.println("====================================================");
-				printMetadata(metadata);
-				System.out
-						.println("====================================================");
-				System.out
-						.println("========== CUERPO   =============================");
-				System.out
-						.println("====================================================");
-				System.out.println(handler.toString());
-				System.out
-						.println("====================================================");
+//				System.out
+//						.println("====================================================");
+//				System.out
+//						.println("========== METADATOS   =============================");
+//				System.out
+//						.println("====================================================");
+//				printMetadata(metadata);
+//				System.out
+//						.println("====================================================");
+//				System.out
+//						.println("========== CUERPO   =============================");
+//				System.out
+//						.println("====================================================");
+//				System.out.println(handler.toString());
+//				System.out
+//						.println("====================================================");
 				metadata.get("creator");
-				kafkaBean.setContent(handler.toString());				
-				kafkaBean.setMetadata(metadata.toString());
+				kafkaBean=fillKafkaBean(metadata, handler, mimeType, path);
+
 				ficheros.add(kafkaBean);
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -96,9 +96,27 @@ public class FilesAnalizer {
 		return ficheros;
 	}
 	
-//	private KafkaBean fillKafkaBean(Metadata metadata, BodyContentHandler handler){
-//		
-//	}
+	/**
+	 * Se genera el bean que se va a transmitir a kafka con los datos obtenidos del procesamiento del fichero
+	 * @param metadata
+	 * @param handler
+	 * @return
+	 */
+	private KafkaBean fillKafkaBean(Metadata metadata, BodyContentHandler handler, String mimeType, String path){
+		KafkaBean kafkaBean=new KafkaBean();
+		if (metadata!=null && handler!=null){
+			String contenido=handler.toString();			
+			kafkaBean.setPalabras(Integer.toString(contenido.split(" ").length));
+			kafkaBean.setContent(contenido);
+			kafkaBean.setMetadata(metadata.toString());
+			kafkaBean.setMimeType(mimeType);
+			kafkaBean.setFichero(path);
+			kafkaBean.setId(Long.toString(new Date().getTime()));
+			kafkaBean.setStatus("new");
+			return kafkaBean;			
+		}
+		return kafkaBean;
+	}
 
 	/**
 	 * Se muestra por pantalla las propiedades de metadatos del fichero. Inicialmente se muestran todos para evaluar la 
