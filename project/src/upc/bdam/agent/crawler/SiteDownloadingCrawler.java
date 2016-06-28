@@ -81,9 +81,9 @@ public class SiteDownloadingCrawler extends AgentCrawler {
 		
 		byte[] kafkaInfo=encoder.serialize(bean);
 		DocumentDataSource dataSource=new DocumentDataSource();
-		dataSource.insertTika(bean);
+		//dataSource.insertTika(bean);
 		bean=encoder.deserialize(kafkaInfo);
-		//producer.produce(kafkaInfo);
+		producer.produce(kafkaInfo);
 	}
 	
 //	@Override
