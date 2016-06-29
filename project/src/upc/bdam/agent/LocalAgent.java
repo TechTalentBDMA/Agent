@@ -93,8 +93,8 @@ public class LocalAgent {
 		for (KafkaBean fichero: ficherosPDF){
 			byte[] kafkaInfo=encoder.serialize(fichero);
 			KafkaBean dese=encoder.deserialize(kafkaInfo);
-			//producer.produce(kafkaInfo);
-			dataSource.insertTika(fichero);
+			producer.produce(kafkaInfo);
+			//dataSource.insertTika(fichero);
 		}
 		
 		System.out.println("EL NÚMERO DE FICHEROS PDF ES: " + ficherosPDF.size());
